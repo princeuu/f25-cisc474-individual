@@ -1,0 +1,39 @@
+---
+config:
+  layout: fixed
+---
+flowchart TD
+ subgraph STUGRAPH["Student Dashboard"]
+        STUCOURSES["Courses"]
+        STUPROF["Profile"]
+        STUCAL["Calendar"]
+        STUINBOX["Inbox"]
+  end
+ subgraph INSGRAPH["Instructor Dashboard"]
+        INSCOURSES["Courses"]
+        INSPROF["Profile"]
+        INSCAL["Calendar"]
+        INSINBOX["Inbox"]
+  end
+ subgraph ADMGRAPH["Admin Dashboard"]
+        OVERVIEW["Overview"]
+        USERS["Users"]
+        COURSES["Create Course"]
+        SETTINGS["System Settings"]
+        LOGS["Audit Logs"]
+  end
+    LOGIN["Login / Register"] --> STU["Student"] & INS["Instructor"] & ADM["Admin"]
+    STU --> STUGRAPH
+    STUCOURSES --> SCDET["Course List"]
+    SCDET --> STUSPE["Specific Course"]
+    STUSPE --> SASSIGN["Assignments"] & SGRADES["Grades & Feedback"] & STUASS["Announcements"] & QUIZ["Quizzes"]
+    SASSIGN --> SSUBMIT["Submit Work"] & SSUBS["My Submissions"]
+    SSUBMIT --> NEXTHW["Next Assignment"]
+    NEXTHW --> SASSIGN
+    INS --> INSGRAPH
+    INSCOURSES --> ICDET["Course List"]
+    ICDET --> ISPE["Specific Course"]
+    ISPE --> IASSIGN["Assignments"] & IANALYTICS["Class Analytics"] & IGRADING["Grading To-Do"] & IANN["Announcements"]
+    IANN --> CREATEANN["Create Announcement"]
+    IASSIGN --> ICREATE["Create / Edit Assignment or Quiz"] & ISUBS["Submissions"]
+    ADM --> ADMGRAPH
