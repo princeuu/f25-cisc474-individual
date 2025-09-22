@@ -1,0 +1,21 @@
+id,role,isActive,joinedAt,userId,courseID
+cmfuisbig000nizy8guj2dzal,INSTRUCTOR,true,2025-09-22 02:41:24.807,cmfuisb830009izy8mfsu1ww5,cmfuisbdr000aizy81jynf1wr
+cmfuisbig000oizy8etqwff5k,STUDENT,true,2025-09-22 02:41:24.807,cmfuisb7u0005izy88dl3lnjj,cmfuisbdr000aizy81jynf1wr
+cmfuisbig000pizy8dub8oidl,STUDENT,true,2025-09-22 02:41:24.807,cmfuisb7v0007izy8ya8zna6f,cmfuisbdr000bizy825ec61ch
+cmfuisbig000qizy8pn0jy7xz,STUDENT,true,2025-09-22 02:41:24.808,cmfuisb7v0008izy81r3odl5k,cmfuisbdr000aizy81jynf1wr
+cmfuisbig000rizy86kf58qac,INSTRUCTOR,true,2025-09-22 02:41:24.808,cmfuisb6z0003izy845mk9nbl,cmfuisbdr000aizy81jynf1wr
+cmfuisbig000sizy8lnczsdch,STUDENT,true,2025-09-22 02:41:24.808,cmfuisaz10000izy8hurkumf3,cmfuisbdr000cizy8zwvkd5vo
+cmfuisbig000tizy84qkxoyos,INSTRUCTOR,true,2025-09-22 02:41:24.808,cmfuisb6o0001izy8qqulk0q8,cmfuisbdr000cizy8zwvkd5vo
+cmfuisbig000uizy80d5q29u7,STUDENT,true,2025-09-22 02:41:24.808,cmfuisb7t0004izy8g3wkgbh6,cmfuisbdr000bizy825ec61ch
+cmfuisbig000vizy89sochqdf,STUDENT,true,2025-09-22 02:41:24.808,cmfuisb6y0002izy8nw35jxlw,cmfuisbdr000bizy825ec61ch
+cmfuisbig000wizy8fmjfisc9,INSTRUCTOR,true,2025-09-22 02:41:24.808,cmfuisb7u0006izy8ra7bkz3p,cmfuisbdr000aizy81jynf1wr
+cmfuj4ve3000niz7f6vwadbyx,STUDENT,true,2025-09-22 02:51:10.427,cmfuj4v260002iz7fud84hwww,cmfuj4v99000ciz7fx8ffz2ci
+cmfuj4ve3000oiz7ftya98or5,STUDENT,true,2025-09-22 02:51:10.427,cmfuj4v380008iz7fhlhuk0qs,cmfuj4v99000ciz7fx8ffz2ci
+cmfuj4ve3000piz7fjx63c8ed,STUDENT,true,2025-09-22 02:51:10.427,cmfuj4v390009iz7fpooywk8b,cmfuj4v99000biz7fmc8a0lvh
+cmfuj4ve3000qiz7ffclpeh16,STUDENT,true,2025-09-22 02:51:10.427,cmfuj4v370007iz7faxo7pr2c,cmfuj4v99000aiz7f1dibbqmx
+cmfuj4ve3000riz7fu4ybk396,STUDENT,true,2025-09-22 02:51:10.427,cmfuj4v2g0005iz7farnivnxz,cmfuj4v99000aiz7f1dibbqmx
+cmfuj4ve3000siz7f9f0d2ox4,INSTRUCTOR,true,2025-09-22 02:51:10.428,cmfuj4uvq0000iz7ftk31mp6o,cmfuj4v99000aiz7f1dibbqmx
+cmfuj4ve3000tiz7fnvoq47qe,STUDENT,true,2025-09-22 02:51:10.428,cmfuj4v2e0004iz7ft4yi8xw2,cmfuj4v99000aiz7f1dibbqmx
+cmfuj4ve3000uiz7f13uib3ko,INSTRUCTOR,true,2025-09-22 02:51:10.428,cmfuj4v2z0006iz7fjfrnv2oj,cmfuj4v99000aiz7f1dibbqmx
+cmfuj4ve3000viz7fapanmh6d,STUDENT,true,2025-09-22 02:51:10.428,cmfuj4v2e0003iz7fnsp6a56v,cmfuj4v99000aiz7f1dibbqmx
+cmfuj4ve3000wiz7fa5ht27o8,STUDENT,true,2025-09-22 02:51:10.428,cmfuj4v240001iz7fabhpz8y4,cmfuj4v99000aiz7f1dibbqmx

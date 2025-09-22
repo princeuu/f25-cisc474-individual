@@ -1,10 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+enum Role {
+  STUDENT
+  INSTRUCTOR
 }
 
 generator client {
@@ -12,9 +8,64 @@ generator client {
   output   = "../generated/client"
 }
 
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
+  id          String       @id @default(cuid())
+  name        String?
+  email       String?      @unique
+  enrollments Enrollment[]
+  submissions Submission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Course {
+  id          String       @id @default(cuid())
+  title       String
+  code        String
+  term        String
+  year        Int
+  enrollments Enrollment[]
+  assignments Assignment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@unique([code, term, year]) // same code allowed across terms/years
+}
+
+model Enrollment {
+  id       String   @id @default(cuid())
+  role     Role
+  isActive Boolean  @default(true)
+  joinedAt DateTime @default(now())
+
+  userId   String
+  user     User   @relation(fields: [userId], references: [id]) // references User table
+  courseID String
+  course   Course @relation(fields: [courseID], references: [id]) // references Course table
+}
+
+model Assignment {
+  id          String       @id @default(cuid())
+  title       String
+  points      Int
+  submissions Submission[]
+  courseId    String
+  course      Course       @relation(fields: [courseId], references: [id]) // references Course table
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Submission {
+  id           String     @id @default(cuid())
+  userId       String
+  submittedAt  DateTime?
+  assignmentId String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id]) // references Assignment table
+  user         User       @relation(fields: [userId], references: [id])
 }
