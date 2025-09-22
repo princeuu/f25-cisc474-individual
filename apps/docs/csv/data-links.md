@@ -1,7 +1,7 @@
 # Project Data Links
 
 ## Prisma Schema
-- [schema.prisma](#prisma-schema)
+- [schema.prisma](../../packages/database/prisma/schema.prisma)
 
 ## Exported Table Data
 
