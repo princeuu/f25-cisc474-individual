@@ -2,11 +2,10 @@
   "name": "@repo/api",
   "version": "0.0.0",
   "private": true,
-  "license": "MIT",
   "scripts": {
     "types": "tsc -p tsconfig.types.json",
-    "dev": "tsup src/index.ts --dts --format cjs,esm --watch --onSuccess \"npm run types\"",
-    "build": "tsup src/index.ts --dts --format cjs,esm && npm run types",
+    "dev": "tsup src/**/*.ts --dts --format cjs,esm --watch --onSuccess \"npm run types\"",
+    "build": "tsup src/**/*.ts --dts --format cjs,esm && npm run types",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
   },
   "main": "./dist/index.js",
@@ -15,16 +14,6 @@
   "files": [
     "./dist/**"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "src/*"
-      ]
-    }
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -48,6 +37,6 @@
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.2",
     "typescript": "5.5.4",
-    "tsup": "^8.1.0"
+    "tsup": "^8.5.0"
   }
 }
