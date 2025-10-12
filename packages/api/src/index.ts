@@ -1,14 +1,4 @@
-import { Link } from './links/entities/link.entity';
 
-import { CreateLinkDto } from './links/dto/create-link.dto';
-import { UpdateLinkDto } from './links/dto/update-link.dto';
-
-export const links = {
-  dto: {
-    CreateLinkDto,
-    UpdateLinkDto,
-  },
-  entities: {
-    Link,
-  },
-};
+export { CreateLinkDto } from './links/dto/create-link.dto'
+export { UpdateLinkDto } from './links/dto/update-link.dto'
+export { Link } from './links/entities/link.entity'

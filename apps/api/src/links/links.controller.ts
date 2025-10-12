@@ -9,12 +9,11 @@ import {
 } from '@nestjs/common';
 import { LinksService } from './links.service';
 
-import { CreateLinkDto } from '@repo/api/links/dto/create-link.dto';
-import { UpdateLinkDto } from '@repo/api/links/dto/update-link.dto';
+import { CreateLinkDto, UpdateLinkDto } from '@repo/api'
 
 @Controller('links')
 export class LinksController {
-  constructor(private readonly linksService: LinksService) {}
+  constructor(private readonly linksService: LinksService) { }
 
   @Post()
   create(@Body() createLinkDto: CreateLinkDto) {
