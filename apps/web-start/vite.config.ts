@@ -17,6 +17,17 @@ const config = defineConfig({
     // this must go last to ensure that SSR functions are found
     viteReact(),
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000', // your Nest dev server
+        changeOrigin: true,
+      },
+    },
+  },
+
 });
+
+
 
 export default config;
