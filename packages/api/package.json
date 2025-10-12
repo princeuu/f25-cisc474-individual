@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "types": "tsc -p tsconfig.types.json",
-    "dev": "tsup src/* --format cjs,esm --watch --onSuccess \"npm run types\"",
-    "build": "tsup src/* --format cjs,esm && npm run types",
+    "dev": "tsup src/index.ts --dts --format cjs,esm --watch --onSuccess \"npm run types\"",
+    "build": "tsup src/index.ts --dts --format cjs,esm && npm run types",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
   },
   "main": "./dist/index.js",
@@ -47,6 +47,7 @@
     "@types/node": "^22.10.7",
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.2",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "tsup": "^8.1.0"
   }
 }
