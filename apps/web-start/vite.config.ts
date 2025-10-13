@@ -18,9 +18,10 @@ const config = defineConfig({
     viteReact(),
   ],
   server: {
+    port: 3002,
     proxy: {
       '/api': {
-        target: 'http://localhost:4000', // your Nest dev server
+        target: 'http://localhost:3001', // your Nest dev server
         changeOrigin: true,
       },
     },

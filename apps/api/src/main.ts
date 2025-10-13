@@ -10,16 +10,18 @@ async function bootstrap() {
   // Allow your frontend to call the API during dev
   // Add your deployed frontend URL(s) here when you deploy
   app.enableCors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3002', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   })
 
   // Run API on a different port than the frontend
-  const port = Number(process.env.PORT) || 4000
+  const port = Number(process.env.PORT) || 3001
   const host = process.env.HOST || '0.0.0.0' // '0.0.0.0' if you want external access
   await app.listen(port, host)
 
-  console.log(`API listening on http://${host}:${port}/api`)
+
+  console.log(`🚀 API running at http://localhost:${port}/api`);
 }
 
 void bootstrap();
