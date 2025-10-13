@@ -3,21 +3,21 @@
 Base URL: `https://f25-cisc474-individual-02c9.onrender.com/`
 
 ## Users
-- [All Users](https://f25-cisc474-individual-02c9.onrender.com/users)
-- [By ID](https://f25-cisc474-individual-02c9.onrender.com/users/cmfuj4v2e0003iz7fnsp6a56v)
+- [All Users](https://f25-cisc474-individual-02c9.onrender.com/api/users)
+- [By ID](https://f25-cisc474-individual-02c9.onrender.com/api/users/cmfuisb6o0001izy8qqulk0q8)
 
 ## Courses
-- [All Courses](https://f25-cisc474-individual-02c9.onrender.com/courses)
-- [By ID](https://f25-cisc474-individual-02c9.onrender.com/courses/cmfuj4v99000ciz7fx8ffz2ci)
+- [All Courses](https://f25-cisc474-individual-02c9.onrender.com/api/courses)
+- [By ID](https://f25-cisc474-individual-02c9.onrender.com/api/courses/cmfuisbdr000aizy81jynf1wr)
 
 ## Assignments
-- [All](https://f25-cisc474-individual-02c9.onrender.com/assignments)
-- [By ID](https://f25-cisc474-individual-02c9.onrender.com/assignments/cmfuits650011izy8r37mcxkv)
+- [All](https://f25-cisc474-individual-02c9.onrender.com/api/assignments)
+- [By ID](https://f25-cisc474-individual-02c9.onrender.com/api/assignments/cmfuits650017izy8uxs3b15i)
 
 ## Submissions
-- [All](https://f25-cisc474-individual-02c9.onrender.com/submissions)
-- [By ID](https://f25-cisc474-individual-02c9.onrender.com/submissions/cmfuisbp3001oizy8mzpbxmbr)
+- [All](https://f25-cisc474-individual-02c9.onrender.com/api/submissions)
+- [By ID](https://f25-cisc474-individual-02c9.onrender.com/api/submissions/cmfuisbp3001pizy8oh07pqxg)
 
 ## Enrollments
-- [All](https://f25-cisc474-individual-02c9.onrender.com/enrollments)
-- [By ID](https://f25-cisc474-individual-02c9.onrender.com/enrollments/cmfuj4ve3000tiz7fnvoq47qe)
+- [All](https://f25-cisc474-individual-02c9.onrender.com/api/enrollments)
+- [By ID](https://f25-cisc474-individual-02c9.onrender.com/api/enrollments/cmfuisbig000uizy80d5q29u7)
