@@ -10,7 +10,10 @@ async function bootstrap() {
   // Allow your frontend to call the API during dev
   // Add your deployed frontend URL(s) here when you deploy
   app.enableCors({
-    origin: ['http://localhost:3002', 'http://localhost:5173'],
+    origin: [
+      'http://localhost:3002',
+      'http://localhost:5173',
+      'https://474-individual-lms.princeyclarky.workers.dev'],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   })
