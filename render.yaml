@@ -3,35 +3,13 @@ services:
     name: course-manager-api
     env: node
     plan: free
-    rootDir: .
-    buildCommand: |
-      echo "🔧 Installing dependencies..."
-      npm ci
-
-      echo "🏗️ Building shared packages..."
-      npm run build -w packages/api
-      npm run build -w packages/database
-
-      echo "🚀 Building API app..."
-      npm run build -w apps/api
-
-      echo "📦 Preparing @repo packages for runtime..."
-      mkdir -p apps/api/node_modules/@repo/api
-      mkdir -p apps/api/node_modules/@repo/database
-
-      cp -r packages/api/dist apps/api/node_modules/@repo/api/dist
-      cp -r packages/database/dist apps/api/node_modules/@repo/database/dist
-      cp packages/api/package.json apps/api/node_modules/@repo/api/package.json
-      cp packages/database/package.json apps/api/node_modules/@repo/database/package.json
-
-      echo "✅ Build complete!"
-    startCommand: npm run start:prod -w apps/api
-    preDeployCommand: cd packages/database && npx prisma migrate deploy && npx prisma db seed
+    buildCommand: npm install && npx turbo run build --filter=api
+    startCommand: npm run start:prod --workspace=apps/api
+    preDeployCommand: npm run db:migrate:deploy --workspace=packages/database && npm run db:seed --workspace=packages/database
     healthCheckPath: /api
-    autoDeploy: true
     envVars:
       - key: NODE_VERSION
-        value: 22
+        value: 20
       - key: PORT
         value: 10000
       - key: DATABASE_URL
