@@ -10,7 +10,7 @@ services:
       mkdir -p apps/api/node_modules/@repo &&
       cp -r packages/api apps/api/node_modules/@repo/api &&
       cp -r packages/database apps/api/node_modules/@repo/database
-    startCommand: cd apps/api && node dist/main.js
+    startCommand: npm run start:prod -w apps/api
     preDeployCommand: cd packages/database && npx prisma migrate deploy && npx prisma db seed
     healthCheckPath: /api
     autoDeploy: true
