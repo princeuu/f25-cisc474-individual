@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "types": "tsc -p tsconfig.types.json",
-    "dev": "tsup src/**/*.ts --dts --format cjs,esm --watch --onSuccess \"npm run types\"",
-    "build": "tsup src/**/*.ts --dts --format cjs,esm && npm run types",
+    "dev": "tsup src/index.ts src/**/*.ts --dts --format cjs,esm --watch --onSuccess \"npm run types\"",
+    "build": "tsup src/index.ts src/**/*.ts --dts --format cjs,esm && npm run types",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
   },
   "main": "./dist/index.js",
@@ -17,12 +17,12 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
     "./*": {
       "types": "./dist/*.d.ts",
-      "import": "./dist/*.js",
+      "import": "./dist/*.mjs",
       "require": "./dist/*.js"
     }
   },
