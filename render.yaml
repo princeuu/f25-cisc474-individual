@@ -4,10 +4,10 @@ services:
     env: node
     plan: free
     rootDir: .
-    buildCommand: npm install  && npm run build
-    startCommand: cd apps/api && npm run start:prod
+    buildCommand: npm install && npm run build && ls -la packages/api/dist && ls -la apps/api/dist
+    startCommand: cd apps/api && node -r tsconfig-paths/register dist/main.js
     preDeployCommand: cd packages/database && npx prisma migrate deploy && npx prisma db seed
-    healthCheckPath: /
+    healthCheckPath: /api
     autoDeploy: true
     envVars:
       - key: NODE_VERSION
@@ -15,6 +15,6 @@ services:
       - key: PORT
         value: 10000
       - key: DATABASE_URL
-        sync: false  # set in Dashboard or via render CLI
+        sync: false
       - key: DIRECT_URL
-        sync: false  # set in Dashboard or via render CLI
+        sync: false
