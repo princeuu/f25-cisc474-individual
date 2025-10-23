@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 import type { ReactNode } from 'react';
 import {
+  Link,
   Outlet,
   createRootRouteWithContext,
   HeadContent,
@@ -38,8 +39,51 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     ],
   }),
 
+  component: RootComponent,
   shellComponent: RootDocument,
 });
+
+function RootComponent() {
+  return (
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Sticky Sidebar */}
+      <aside className="w-64 bg-gray-800 text-white p-6 flex flex-col sticky top-0 h-screen">
+        <h2 className="text-2xl font-bold mb-8">📚 Course Manager</h2>
+        
+        <nav className="flex flex-col gap-2">
+          <Link
+            to="/"
+            className="px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center gap-3"
+            activeProps={{ className: 'bg-gray-700' }}
+          >
+            🏠 Home
+          </Link>
+          
+          <Link
+            to="/courses"
+            className="px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center gap-3"
+            activeProps={{ className: 'bg-gray-700' }}
+          >
+            📘 Courses
+          </Link>
+          
+          <Link
+            to="/account"
+            className="px-4 py-3 rounded-lg hover:bg-gray-700 transition flex items-center gap-3"
+            activeProps={{ className: 'bg-gray-700' }}
+          >
+            👤 Users
+          </Link>
+        </nav>
+      </aside>
+
+      {/* Main Content - Scrollable */}
+      <main className="flex-1 overflow-y-auto">
+        <Outlet />
+      </main>
+    </div>
+  );
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (

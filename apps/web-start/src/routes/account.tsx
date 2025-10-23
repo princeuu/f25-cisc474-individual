@@ -44,6 +44,7 @@ function AccountList() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-50">
       <h1 className="text-3xl font-bold mb-6">Accounts</h1>
+      <h2 className="text-red-500 font-bold mb-6">I have not implemented CRUD for accounts yet</h2>
       <ul className="w-full max-w-2xl space-y-4">
         {users.map((user: User) => (
           <li

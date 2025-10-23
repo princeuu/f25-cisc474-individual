@@ -7,7 +7,8 @@ export const Route = createFileRoute('/')({
 function RouteComponent() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-6 text-center bg-gray-50">
-  <h1 className="text-3xl font-bold text-gray-800">Hello World!</h1>
+  <h1 className="text-3xl font-bold text-gray-800">Welcome to your DashBoard!</h1>
+    <h2 className="text-gray-800">You can use the buttons below to navigate through courses and accounts or you can use the side-panel</h2>
 
   <div className="flex flex-col gap-4">
     <Link
