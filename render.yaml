@@ -4,8 +4,13 @@ services:
     env: node
     plan: free
     rootDir: .
-    buildCommand: npm install && npm run build && ls -la packages/api/dist && ls -la apps/api/dist
-    startCommand: cd apps/api && node -r tsconfig-paths/register dist/main.js
+    buildCommand: |
+      npm install &&
+      npm run build &&
+      mkdir -p apps/api/node_modules/@repo &&
+      cp -r packages/api apps/api/node_modules/@repo/api &&
+      cp -r packages/database apps/api/node_modules/@repo/database
+    startCommand: cd apps/api && node dist/main.js
     preDeployCommand: cd packages/database && npx prisma migrate deploy && npx prisma db seed
     healthCheckPath: /api
     autoDeploy: true
