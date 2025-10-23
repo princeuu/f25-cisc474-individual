@@ -5,13 +5,26 @@ services:
     plan: free
     rootDir: .
     buildCommand: |
-      npm ci &&
-      npm run build -w packages/api &&
-      npm run build -w packages/database &&
-      npm run build -w apps/api &&
-      mkdir -p apps/api/node_modules/@repo &&
-      cp -r packages/api apps/api/node_modules/@repo/api &&
-      cp -r packages/database apps/api/node_modules/@repo/database
+      echo "🔧 Installing dependencies..."
+      npm ci
+
+      echo "🏗️ Building shared packages..."
+      npm run build -w packages/api
+      npm run build -w packages/database
+
+      echo "🚀 Building API app..."
+      npm run build -w apps/api
+
+      echo "📦 Preparing @repo packages for runtime..."
+      mkdir -p apps/api/node_modules/@repo/api
+      mkdir -p apps/api/node_modules/@repo/database
+
+      cp -r packages/api/dist apps/api/node_modules/@repo/api/dist
+      cp -r packages/database/dist apps/api/node_modules/@repo/database/dist
+      cp packages/api/package.json apps/api/node_modules/@repo/api/package.json
+      cp packages/database/package.json apps/api/node_modules/@repo/database/package.json
+
+      echo "✅ Build complete!"
     startCommand: npm run start:prod -w apps/api
     preDeployCommand: cd packages/database && npx prisma migrate deploy && npx prisma db seed
     healthCheckPath: /api
