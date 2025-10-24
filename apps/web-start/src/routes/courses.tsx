@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { backendFetcher } from '../integrations/fetcher';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { backendFetcher, backendMutate } from '../integrations/fetcher';
+import { useSuspenseQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import type { CourseDto, CreateCourseDto, UpdateCourseDto } from '@repo/api';
 
@@ -29,10 +29,9 @@ function CoursesPage() {
 
 // // --- useQuery hook (Suspense enabled) ---
 function useCourses() {
-  return useQuery<Course[]>({
+  return useSuspenseQuery<Course[]>({
     queryKey: ['courses'],
     queryFn: backendFetcher<Course[]>('/api/courses'),
-    suspense: true, // Suspense handles loading state
   });
 }
 
@@ -48,18 +47,16 @@ function CoursesList() {
 // Create mutation
   const createMutation = useMutation({
     mutationFn: async (data: CreateCourseDto) => {
-      const response = await fetch('/api/courses', {
+      return backendMutate<Course>('/api/courses', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error('Failed to create course');
-      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
     },
   });
+  
   // Scroll to edit form when editing starts provided by copilot
   React.useEffect(() => {
     if (editingCourse && editFormRef.current) {
@@ -78,13 +75,10 @@ function CoursesList() {
   // Update mutation
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateCourseDto }) => {
-      const response = await fetch(`/api/courses/${id}`, {
+      return backendMutate<Course>(`/api/courses/${id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error('Failed to update course');
-      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
@@ -95,10 +89,9 @@ function CoursesList() {
   // Delete mutation
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      const response = await fetch(`/api/courses/${id}`, {
+      return backendMutate<void>(`/api/courses/${id}`, {
         method: 'DELETE',
       });
-      if (!response.ok) throw new Error('Failed to delete course');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
