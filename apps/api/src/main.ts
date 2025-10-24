@@ -15,7 +15,7 @@ async function bootstrap() {
       'http://localhost:3002',
       'http://localhost:5173',
       'https://474-individual-lms.princeyclarky.workers.dev',
-      'https://f25-cisc474-individual-02c9.onrender.com'
+      'https://f25-cisc474-individual-02c9.onrender.com/api'
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
