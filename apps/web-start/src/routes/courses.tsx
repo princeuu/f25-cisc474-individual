@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { backendFetcher, backendMutate } from '../integrations/fetcher';
+import { backendFetcher, mutateBackend } from '../integrations/fetcher';
 import { useSuspenseQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import type { CourseDto, CreateCourseDto, UpdateCourseDto } from '@repo/api';
@@ -44,19 +44,6 @@ function CoursesList() {
 
   const editFormRef = React.useRef<HTMLDivElement>(null);
 
-// Create mutation
-  const createMutation = useMutation({
-    mutationFn: async (data: CreateCourseDto) => {
-      return backendMutate<Course>('/api/courses', {
-        method: 'POST',
-        body: JSON.stringify(data),
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['courses'] });
-    },
-  });
-  
   // Scroll to edit form when editing starts provided by copilot
   React.useEffect(() => {
     if (editingCourse && editFormRef.current) {
@@ -71,14 +58,21 @@ function CoursesList() {
       }, 2000);
     }
   }, [editingCourse]);
+
+// Create mutation
+  const createMutation = useMutation({
+    mutationFn: async (data: CreateCourseDto) => {
+      return mutateBackend<CreateCourseDto, Course>(`/api/courses`, 'POST', data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['courses'] });
+    },
+  });
   
   // Update mutation
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateCourseDto }) => {
-      return backendMutate<Course>(`/api/courses/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-      });
+      return mutateBackend<UpdateCourseDto, Course>(`/api/courses/${id}`, 'PATCH', data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
@@ -89,9 +83,7 @@ function CoursesList() {
   // Delete mutation
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      return backendMutate<void>(`/api/courses/${id}`, {
-        method: 'DELETE',
-      });
+      return mutateBackend<undefined, void>(`/api/courses/${id}`, 'DELETE');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
