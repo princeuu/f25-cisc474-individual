@@ -34,6 +34,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.8.0",
     "@nestjs/config": "^4.0.2",
     "@nestjs/mapped-types": "*",
     "@prisma/client": "^6.16.3",

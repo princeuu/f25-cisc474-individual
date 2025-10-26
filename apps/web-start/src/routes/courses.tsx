@@ -4,6 +4,7 @@ import { backendFetcher, mutateBackend } from '../integrations/fetcher';
 import { useSuspenseQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import type { CourseDto, CreateCourseDto, UpdateCourseDto } from '@repo/api';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface Course {
   id: string;
@@ -29,15 +30,30 @@ function CoursesPage() {
 
 // // --- useQuery hook (Suspense enabled) ---
 function useCourses() {
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+
   return useSuspenseQuery<Course[]>({
     queryKey: ['courses'],
-    queryFn: backendFetcher<Course[]>('/api/courses'),
+    queryFn: async () => {
+      if (!isAuthenticated) {
+        throw new Error('Not authenticated');
+      }
+      
+      const token = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        }
+      });
+      
+      return backendFetcher<Course[]>('/api/courses', token)();
+    },
   });
 }
 
 // --- Main List ---
 function CoursesList() {
   const { data } = useCourses();
+  const { getAccessTokenSilently } = useAuth0();
   const courses = Array.isArray(data) ? data : [];
   const queryClient = useQueryClient();
   const [editingCourse, setEditingCourse] = React.useState<CourseDto | null>(null);
@@ -59,20 +75,30 @@ function CoursesList() {
     }
   }, [editingCourse]);
 
-// Create mutation
+  // Create mutation with AUTH
   const createMutation = useMutation({
     mutationFn: async (data: CreateCourseDto) => {
-      return mutateBackend<CreateCourseDto, Course>(`/api/courses`, 'POST', data);
+      const token = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        }
+      });
+      return mutateBackend<CreateCourseDto, Course>(`/api/courses`, 'POST', data, token);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
     },
   });
   
-  // Update mutation
+  // Update mutation with AUTH
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateCourseDto }) => {
-      return mutateBackend<UpdateCourseDto, Course>(`/api/courses/${id}`, 'PATCH', data);
+      const token = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        }
+      });
+      return mutateBackend<UpdateCourseDto, Course>(`/api/courses/${id}`, 'PATCH', data, token);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
@@ -80,10 +106,15 @@ function CoursesList() {
     },
   });
 
-  // Delete mutation
+  // Delete mutation with AUTH
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      return mutateBackend<undefined, void>(`/api/courses/${id}`, 'DELETE');
+      const token = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        }
+      });
+      return mutateBackend<undefined, void>(`/api/courses/${id}`, 'DELETE', undefined, token);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });

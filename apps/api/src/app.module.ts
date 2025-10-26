@@ -9,9 +9,10 @@ import { CoursesModule } from './courses/courses.module';
 import { AssignmentsModule } from './assignments/assignments.module';
 import { SubmissionsModule } from './submissions/submissions.module';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [LinksModule, UsersModule, CoursesModule, AssignmentsModule, SubmissionsModule, EnrollmentsModule],
+  imports: [LinksModule, UsersModule, CoursesModule, AssignmentsModule, SubmissionsModule, EnrollmentsModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,6 +1,15 @@
-export function backendFetcher<T>(endpoint: string): () => Promise<T> {
+export function backendFetcher<T>(endpoint: string, token? : string): () => Promise<T> {
   return async () => {
-    const res = await fetch(import.meta.env.VITE_BACKEND_URL + endpoint);
+    const headers: HeadersInit = {};
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
+    const res = await fetch(import.meta.env.VITE_BACKEND_URL + endpoint, {
+      headers,
+    });
+
     if (!res.ok) {
       throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
     }
@@ -12,19 +21,26 @@ export async function mutateBackend<Input, Output>(
   endpoint: string,
   method: string,
   body?: Input,
+  token?: string,
 ): Promise<Output> {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
   const response = await fetch(import.meta.env.VITE_BACKEND_URL + endpoint, {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
+    headers,
+    body: body ? JSON.stringify(body) : undefined,
   });
+  
   if (!response.ok) {
     throw new Error(`Error: ${response.status} ${response.statusText}`);
   }
   
-  // Handle DELETE or 204 No Content
   if (response.status === 204 || method === 'DELETE') {
     return undefined as Output;
   }
